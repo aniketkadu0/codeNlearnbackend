@@ -1,12 +1,11 @@
 const verifyClient = (req, res, next) => {
-    const credential = req.header("Authorization");
+    const credential = req.body();
     if (!credential) return res.status(400).send("access denied");
   
     try {
         console.log(credential)
-      const verifiedUser = credential.Username == 'client' && credential.Password == 'baby' ? true : false
+      const verifiedUser = credential.username == 'client' && credential.password == 'baby' ? true : false
       if(verifiedUser){
-      req.user = verifiedUser;
       next();
       }
       else throw new Exception();

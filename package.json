@@ -2,10 +2,9 @@
   "name": "blogappbackend",
   "version": "1.0.0",
   "description": "NodeJS backend for blogapp",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "npm start",
-    "build" : "npm start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "NodeJs",

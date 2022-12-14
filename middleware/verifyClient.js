@@ -8,7 +8,7 @@ const verifyClient = (req, res, next) => {
       req.user = verifiedUser;
       next();
       }
-      throw new Exception();
+      else throw new Exception();
     } catch (err) {
       res.status(400).send("invalid credentials");
     }

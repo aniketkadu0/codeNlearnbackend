@@ -4,8 +4,8 @@
   "description": "NodeJS backend for blogapp",
   "main": "server.js",
   "scripts": {
-    "test": "nodemon server.js",
-    "build" : "nodemon server.js"
+    "test": "npm server.js",
+    "build" : "npm server.js"
   },
   "keywords": [
     "NodeJs",

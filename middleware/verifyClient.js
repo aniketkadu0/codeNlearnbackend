@@ -1,5 +1,5 @@
 const verifyClient = (req, res, next) => {
-    const credential = req.header("auth");
+    const credential = req.header("Authorization");
     if (!credential) return res.status(400).send("access denied");
   
     try {

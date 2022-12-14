@@ -2,7 +2,7 @@
   "name": "blogappbackend",
   "version": "1.0.0",
   "description": "NodeJS backend for blogapp",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "npm start",
     "build" : "npm start"

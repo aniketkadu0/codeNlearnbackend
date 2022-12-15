@@ -38,19 +38,7 @@ exports.updateblog = async (req, res) => {
 };
 
 exports.getData = async (req, res) => {
-  try {
-    // try to get the posts from the cache
-    let allBlogs = myCache.get('allBlogs');
-
-    // if allBlogs does not exist in the cache, retrieve it from the
-    // original source and store it in the cache
-    if (allBlogs == null) {
-      allBlogs = await Blog.find({});
-      // time-to-live is set to 300 seconds. After this period
-      // the entry for `allBlogs` will be removed from the cache
-      // and the next request will hit the API again
-      myCache.set('allBlogs', allBlogs, 300);
-    }
+    const allBlogs = await Blog.find({});
 
     if (!allBlogs) {
       res.status(400).send({ error: "no blogs found" });
@@ -59,10 +47,6 @@ exports.getData = async (req, res) => {
         .status(200)
         .send({ message: "here are the found blogs:", allBlogs });
     }
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(500);
-  }
 };
 
 exports.uploadImage = (req, res) => {

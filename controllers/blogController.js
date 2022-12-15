@@ -33,6 +33,27 @@ exports.updateblog = async (req, res) => {
   }
 };
 
+exports.updateviews = async (req, res) => {
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      req.query._id,
+      { $set: {views : req.query.views} },
+      { new: true }
+  );
+  
+    if (!updatedBlog) {
+      return res.status(400).send({ message: "Could not update blog" });
+    }
+    return res
+      .status(200)
+      .send({ message: "Blog updated successfully", updatedBlog });
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ error: "An error has occurred, unable to update blog" });
+  }
+};
+
 exports.getData = async (req, res) => {
     const allBlogs = await Blog.find({});
 

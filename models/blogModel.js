@@ -27,14 +27,28 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    views : Number,
+    views : {
+      type: Number,
+      required: true
+    },
     comments : [{
-      name : String,
-      date : Date,
-      comment : String,
-      reply : String }
-    ]
-  },
+      name : {
+        type: String,
+        required: true
+      },
+      date : {
+        type: Date,
+        required: true
+      },
+      comment : {
+        type: String,
+        required: true
+      },
+      reply : {
+        type: String,
+        required: true
+      } }
+    ]},
   { timestamps: true }
 );
 

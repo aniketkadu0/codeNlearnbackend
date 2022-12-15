@@ -3,7 +3,6 @@ const userController = require("../controllers/userController");
 const blogController = require("../controllers/blogController");
 
 const { verifyUser } = require("../middleware/verifyToken");
-const { imageUpload }  = require("../middleware/imageUpload");
 const { verifyClient } = require("../middleware/verifyClient");
 
 router.get("/",verifyUser, userController.getAllUsers);
@@ -15,8 +14,6 @@ router.get('/data', verifyUser, userController.data);
 router.post('/addblog',blogController.addblog);
 router.get('/getdata',verifyClient,blogController.getData);
 router.post('/updateblog',blogController.updateblog);
-router.post('/uploadImage', imageUpload.single('image'), blogController.uploadImage)
-router.post('/uploadBulkImage', imageUpload.array('images', 10), blogController.uploadBulkImage)
 
 module.exports = router;
 

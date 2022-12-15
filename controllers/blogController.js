@@ -45,19 +45,6 @@ exports.getData = async (req, res) => {
     }
 };
 
-exports.uploadImage = (req, res) => {
-  res.send(req.file)
-}, (error, req, res, next) => {
-  res.status(400).send({ error: error.message })
-}
-
-exports.uploadBulkImage = (req, res) => {
-  console.log(req)
-  res.send(req.files)
-}, (error, req, res, next) => {
-  res.status(400).send({ error: error.message })
-}
-
 const createBlogObj = async (req) => {
     return {
         user: req.body.user,

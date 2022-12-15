@@ -27,9 +27,7 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    views : {
-      type : Number
-    },
+    views : Number,
     comments : [{
       name : String,
       date : Date,

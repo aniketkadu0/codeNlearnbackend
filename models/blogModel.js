@@ -28,8 +28,7 @@ const blogSchema = new mongoose.Schema(
       required: true
     },
     views : {
-      type: Number,
-      required: true
+      type: Number
     },
     comments : [{
       name : {
@@ -38,7 +37,7 @@ const blogSchema = new mongoose.Schema(
       },
       date : {
         type: Date,
-        required: true
+        default: Date.now()
       },
       comment : {
         type: String,

@@ -1,3 +1,4 @@
+const { number } = require("joi");
 const mongoose = require("mongoose");
 
 const blogSchema = new mongoose.Schema(
@@ -25,7 +26,16 @@ const blogSchema = new mongoose.Schema(
     paragraph : {
       type: String,
       required: true
-    }
+    },
+    views : {
+      type : Number
+    },
+    comments : [{
+      name : String,
+      date : Date,
+      comment : String,
+      reply : String }
+    ]
   },
   { timestamps: true }
 );

@@ -1,4 +1,3 @@
-const { number } = require("joi");
 const mongoose = require("mongoose");
 
 const blogSchema = new mongoose.Schema(
@@ -45,7 +44,6 @@ const blogSchema = new mongoose.Schema(
       },
       reply : {
         type: String,
-        required: true
       } }
     ]},
   { timestamps: true }

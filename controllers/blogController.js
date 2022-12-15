@@ -53,6 +53,7 @@ const createBlogObj = async (req) => {
         tagline: req.body.tagline,
         tags: req.body.tags,
         paragraph: req.body.paragraph,
-        phone: req.body.phone,
+        views : req.body.views,
+        comments : req.body.comments
     };
 };

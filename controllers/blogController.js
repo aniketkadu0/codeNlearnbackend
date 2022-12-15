@@ -36,7 +36,7 @@ exports.updateblog = async (req, res) => {
 exports.updateviews = async (req, res) => {
   try {
     const updatedBlog = await Blog.findByIdAndUpdate(
-      req.query._id,
+      req.query.id,
       { $set: {views : req.query.views} },
       { new: true }
   );

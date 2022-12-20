@@ -28,7 +28,7 @@ exports.signUp = async (req, res, next) => {
       .status(200)
       .send({ message: "User created successfully!", user: savedUser });
   } catch (err) {
-    return res.status(400).send({ error: "User not created", error: err });
+    return res.status(400).send({ message : "User not created", error: err });
   }
 };
 
@@ -71,6 +71,18 @@ exports.getAllUsers = async (req, res) => {
       .send({ message: "here are the found users:", allUsers });
   }
 };
+
+exports.getUser = async (req, res) => {
+  try {
+    const foundUser = await User.findOne({ _id: req.user._id });
+    res.send(foundUser)
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ error: "Unable to find user" });
+  }
+};
+
 
 exports.updateUser = async (req, res) => {
   try {
@@ -120,7 +132,6 @@ const createUserObj = async (req) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 10),
-    phone: req.body.phone,
+    password: bcrypt.hashSync(req.body.password, 10)
   };
 };

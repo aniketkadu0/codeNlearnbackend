@@ -54,6 +54,48 @@ exports.updateviews = async (req, res) => {
   }
 };
 
+exports.updatelikes = async (req, res) => {
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      req.query.id,
+      { $set: {likes : req.query.likes} },
+      { new: true }
+  );
+  
+    if (!updatedBlog) {
+      return res.status(400).send({ message: "Could not update blog" });
+    }
+    return res
+      .status(200)
+      .send({ message: "Blog updated successfully", updatedBlog });
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ error: "An error has occurred, unable to update blog" });
+  }
+};
+
+exports.addComment = async (req, res) => {
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      req.query.id,
+      { $push: {comments : req.body} },
+      { new: true }
+  );
+  
+    if (!updatedBlog) {
+      return res.status(400).send({ message: "Could not update blog" });
+    }
+    return res
+      .status(200)
+      .send({ message: "Blog updated successfully", updatedBlog });
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ error: "An error has occurred, unable to update blog" });
+  }
+};
+
 exports.getData = async (req, res) => {
     const allBlogs = await Blog.find({});
 
@@ -68,6 +110,7 @@ exports.getData = async (req, res) => {
 
 const createBlogObj = async (req) => {
     return {
+        date: req.body.date,
         user: req.body.user,
         thumbnail: req.body.thumbnail,
         title: req.body.title,
@@ -75,6 +118,7 @@ const createBlogObj = async (req) => {
         tags: req.body.tags,
         paragraph: req.body.paragraph,
         views : req.body.views,
+        likes : req.body.likes,
         comments : req.body.comments
     };
 };

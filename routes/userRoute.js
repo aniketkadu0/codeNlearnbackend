@@ -6,6 +6,7 @@ const { verifyUser } = require("../middleware/verifyToken");
 const { verifyClient } = require("../middleware/verifyClient");
 
 router.get("/",verifyUser, userController.getAllUsers);
+router.get("/getuser",verifyUser, userController.getUser);
 router.post("/signup", userController.signUp);
 router.post("/login", userController.logIn);
 router.patch('/:userId', userController.updateUser);
@@ -15,6 +16,8 @@ router.post('/addblog',verifyClient,blogController.addblog);
 router.get('/getdata',verifyClient,blogController.getData);
 router.post('/updateblog',verifyClient,blogController.updateblog);
 router.post('/updateviews',verifyClient,blogController.updateviews);
+router.post('/updatelikes',verifyClient,blogController.updatelikes);
+router.post('/addcomment',verifyClient,blogController.addComment);
 
 module.exports = router;
 

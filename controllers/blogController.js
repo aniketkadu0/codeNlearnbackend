@@ -75,7 +75,7 @@ exports.updatelikes = async (req, res) => {
   }
 };
 
-exports.addComment = async (req, res) => {
+exports.addComment = async (req, res, next) => {
   try {
     const updatedBlog = await Blog.findByIdAndUpdate(
       req.query.id,
@@ -86,9 +86,10 @@ exports.addComment = async (req, res) => {
     if (!updatedBlog) {
       return res.status(400).send({ message: "Could not update blog" });
     }
+    else next();
     return res
       .status(200)
-      .send({ message: "Blog updated successfully", updatedBlog });
+      .send({ message: "comment updated successfully", updatedBlog });
   } catch (error) {
     return res
       .status(400)

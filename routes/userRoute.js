@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const userController = require("../controllers/userController");
 const blogController = require("../controllers/blogController");
+const mailController = require("../controllers/mailController");
 
 const { verifyUser } = require("../middleware/verifyToken");
 const { verifyClient } = require("../middleware/verifyClient");
@@ -17,7 +18,9 @@ router.get('/getdata',verifyClient,blogController.getData);
 router.post('/updateblog',verifyClient,blogController.updateblog);
 router.post('/updateviews',verifyClient,blogController.updateviews);
 router.post('/updatelikes',verifyClient,blogController.updatelikes);
-router.post('/addcomment',verifyClient,blogController.addComment);
+router.post('/addcomment',verifyClient,blogController.addComment,mailController.mailer);
+
+// router.post('/mail',verifyClient,mailController.mailer);
 
 module.exports = router;
 

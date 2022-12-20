@@ -14,21 +14,12 @@ async function mailer(req, res, next) {
   });
 
   await transporter.sendMail({
-    from: '"Admin" <admin@cceestudy.online>', 
+    from: `"${req.body.firstName} ${req.body.lastName}" <admin@cceestudy.online>`, 
     to: "admin@cceestudy.online", 
-    subject: `${req.body.firstName} + ' ' + ${req.body.lastName} commented on your blog`, 
-    text: `${req.body.firstName} + ' ' + ${req.body.lastName} commented on ${req.query.title}
-           comment : ${req.body.comment}` 
-  })
-  .then(()=>{
-    return res
-      .status(200)
-      .send({ message: "comment added successfully" });
-  })
-  .catch(()=>{
-    return res
-      .status(400)
-      .send({ error: "An error has occurred, unable to add comment" });  
+    subject: `${req.body.firstName} ${req.body.lastName} commented on your blog`, 
+    html : `<h4>${req.body.firstName} ${req.body.lastName} commented on ${req.query.title}</h4>
+            <h4>Email : </h4><a href="mailto:${req.body.email}" target="_blank">${req.body.email}</a>
+            <h4>Comment : </h4><p>${req.body.comment}</p>`
   })
 
 }

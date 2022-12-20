@@ -55,7 +55,7 @@ exports.logIn = async (req, res) => {
     return res
       .status(200)
       .header("authtoken", token)
-      .send({ "authtoken": token, userId: foundUser._id });
+      .send({ "authtoken": token, userId: foundUser._id , foundUser});
   } catch (error) {
     return res.status(400).send(error);
   }

@@ -121,14 +121,14 @@ exports.getData = async (req, res) => {
 };
 
 exports.getBlog = async (req, res) => {
-  const Blog = await Blog.findById(req.query.id);
+  const foundBlog = await Blog.findById(req.query.id);
 
-  if (!Blog) {
+  if (!foundBlog) {
     res.status(400).send({ error: "no blog found" });
   } else {
     return res
       .status(200)
-      .send({ message: "here are the found blog:", Blog });
+      .send({ message: "here are the found blog:", foundBlog });
   }
 };
 

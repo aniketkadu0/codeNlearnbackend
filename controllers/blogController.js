@@ -107,7 +107,8 @@ exports.getData = async (req, res) => {
       "tags" : 1,
       "views" : 1,
       "likes" : 1,
-      "date" : 1
+      "date" : 1,
+      "comments" : 1
     });
 
     if (!allBlogs) {

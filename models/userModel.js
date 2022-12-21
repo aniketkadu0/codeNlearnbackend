@@ -23,11 +23,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        // phone:{
-        //     type: String,
-        // //password can be 10 digits, between 0 and 9 (number)
-        //     match: /^[0-9]{10}$/,
-        // },
+        role:{
+            type: String,
+            default : 'user'
+        },
         resetPasswordLink:{
             data: String,
             default:'',

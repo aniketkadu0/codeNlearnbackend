@@ -8,7 +8,7 @@ async function mailer(req, res, next) {
     port: 465,
     secure: true, 
     auth: {
-      user: 'admin@cceestudy.online',
+      user: 'admin@codenlearn.online',
       pass: 'Aniket1996@',
     },
   });

@@ -15,7 +15,7 @@ router.delete('/:userId', userController.deleteUser);
 router.get('/data', verifyUser, userController.data);
 router.post('/addblog',verifyClient,blogController.addblog);
 router.get('/getdata',verifyClient,blogController.getData);
-router.get('/getblog/:id/:title',verifyClient,blogController.getBlog);
+router.get('/getblog/:id',verifyClient,blogController.getBlog);
 router.post('/updateblog',verifyClient,blogController.updateblog);
 router.post('/updateviews',verifyClient,blogController.updateviews);
 router.post('/updatelikes',verifyClient,blogController.updatelikes);

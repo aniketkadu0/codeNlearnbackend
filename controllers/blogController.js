@@ -98,7 +98,17 @@ exports.addComment = async (req, res, next) => {
 };
 
 exports.getData = async (req, res) => {
-    const allBlogs = await Blog.find({});
+    const allBlogs = await Blog.find({})
+    .select({ 
+      "_id": 1,
+      "thumbnail": 1,
+      "title" : 1,
+      "tagline" : 1,
+      "tags" : 1,
+      "views" : 1,
+      "likes" : 1,
+      "date" : 1
+    });
 
     if (!allBlogs) {
       res.status(400).send({ error: "no blogs found" });
@@ -107,6 +117,18 @@ exports.getData = async (req, res) => {
         .status(200)
         .send({ message: "here are the found blogs:", allBlogs });
     }
+};
+
+exports.getBlog = async (req, res) => {
+  const Blog = await Blog.findById(req.query.id);
+
+  if (!Blog) {
+    res.status(400).send({ error: "no blog found" });
+  } else {
+    return res
+      .status(200)
+      .send({ message: "here are the found blog:", Blog });
+  }
 };
 
 const createBlogObj = async (req) => {

@@ -7,18 +7,11 @@ const port = process.env.PORT || 8000;
 
 const database = async () => {
   try {
-    await mongoose.connect(
-    process.env.DB_URL,
+    const conn = await mongoose.connect(process.env.DB_URL,
     {   useNewUrlParser: true,
         useUnifiedTopology: true
-    },
-    (error) => {
-        if (!error){
-            console.log("connected to mongoDB!");
-        }else{
-            console.log("connection to mongoDB failed \n" + error);
-        }
     })
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.log(error);
     process.exit(1);

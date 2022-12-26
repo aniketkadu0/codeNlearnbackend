@@ -7,7 +7,7 @@ const port = process.env.PORT || 8000;
 
 const database = async () => {
   try {
-    mongoose.connect(
+    await mongoose.connect(
     process.env.DB_URL,
     {   useNewUrlParser: true,
         useUnifiedTopology: true

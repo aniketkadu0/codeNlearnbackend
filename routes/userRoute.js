@@ -20,6 +20,7 @@ router.post('/updateblog',verifyClient,blogController.updateblog);
 router.post('/updateviews',verifyClient,blogController.updateviews);
 router.post('/updatelikes',verifyClient,blogController.updatelikes);
 router.post('/addcomment',verifyClient,blogController.addComment,mailController.mailer);
+router.post('/addreply',verifyClient,blogController.addReply);
 
 module.exports = router;
 

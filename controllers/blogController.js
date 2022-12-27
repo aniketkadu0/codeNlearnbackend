@@ -89,8 +89,34 @@ exports.addComment = async (req, res, next) => {
     else next();
     return res
       .status(200)
-      .send({ message: "comment updated successfully", updatedBlog });
+      .send({ message: "comment added successfully", updatedBlog });
   } catch (error) {
+    return res
+      .status(400)
+      .send({ error: "An error has occurred, unable to update blog" });
+  }
+};
+
+exports.addReply = async (req, res, next) => {
+  try {
+    const updatedBlog = await Blog.updateOne(
+      {
+        "_id" : req.query.blog_id,
+        "comments._id" : req.query.comment_id 
+      },
+      { $push: {"comments.$.replies" : req.body} },
+      { new: true }
+    );
+      console.log(updatedBlog)
+    if (!updatedBlog) {
+      return res.status(400).send({ message: "Could not update blog" });
+    }
+    else next();
+    return res
+      .status(200)
+      .send({ message: "reply added successfully", updatedBlog });
+  } catch (error) {
+    console.log(error)
     return res
       .status(400)
       .send({ error: "An error has occurred, unable to update blog" });

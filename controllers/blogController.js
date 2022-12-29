@@ -104,7 +104,7 @@ exports.addReply = async (req, res, next) => {
         "_id" : req.query.blog_id,
         "comments._id" : req.query.comment_id 
       },
-      { $push: {"comments.$.replies" : req.body} },
+      { $push: {"comments.$.replies" : req.body.reply} },
       { new: true }
     );
       console.log(updatedBlog)

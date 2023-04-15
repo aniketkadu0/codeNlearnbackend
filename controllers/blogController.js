@@ -1,4 +1,5 @@
 const Blog = require("../models/blogModel");
+const Draft = require("../models/blogDraftModel");
 
 exports.addblog = async (req, res, next) => { 
     try {
@@ -10,6 +11,18 @@ exports.addblog = async (req, res, next) => {
     } catch (err) {
       return res.status(400).send({ error: "Blog not added", error: err });
     }
+};
+
+exports.addDraft = async (req, res, next) => { 
+  try {
+    const newDraft = await createBlogObj(req);
+    const savedDraft = await Draft.create(newDraft);
+    return res
+      .status(200)
+      .send({ message: "Blog added successfully!", Draft: savedDraft });
+  } catch (err) {
+    return res.status(400).send({ error: "Draft not added", error: err });
+  }
 };
 
 exports.updateblog = async (req, res) => {
@@ -98,6 +111,7 @@ exports.addComment = async (req, res, next) => {
 };
 
 exports.addReply = async (req, res, next) => {
+
   try {
     const updatedBlog = await Blog.updateOne(
       {
@@ -107,7 +121,6 @@ exports.addReply = async (req, res, next) => {
       { $push: {"comments.$.replies" : req.body.reply} },
       { new: true }
     );
-      console.log(updatedBlog)
     if (!updatedBlog) {
       return res.status(400).send({ message: "Could not update blog" });
     }
@@ -156,6 +169,41 @@ exports.getBlog = async (req, res) => {
       .status(200)
       .send({ message: "here are the found blog:", foundBlog });
   }
+};
+
+exports.getDrafts = async (req, res) => {
+  const getDrafts = await Draft.find({})
+  .select({ 
+    "_id": 1,
+    "thumbnail": 1,
+    "title" : 1,
+    "tagline" : 1,
+    "tags" : 1,
+    "views" : 1,
+    "likes" : 1,
+    "date" : 1,
+    "comments" : 1
+  });
+
+  if (!getDrafts) {
+    res.status(400).send({ error: "no draft found" });
+  } else {
+    return res
+      .status(200)
+      .send({ message: "here are the found drafts:", allDrafts });
+  }
+};
+
+exports.getDraft = async (req, res) => {
+const foundDraft = await Draft.findById(req.query.id);
+
+if (!foundDraft) {
+  res.status(400).send({ error: "no draft found" });
+} else {
+  return res
+    .status(200)
+    .send({ message: "here are the found draft:", foundDraft });
+}
 };
 
 const createBlogObj = async (req) => {

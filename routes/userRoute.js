@@ -13,12 +13,20 @@ router.post("/login", userController.logIn);
 router.patch('/:userId', userController.updateUser);
 router.delete('/:userId', userController.deleteUser);
 router.get('/data', verifyUser, userController.data);
+
 router.post('/addblog',verifyClient,blogController.addblog);
+router.post('/adddraft',verifyClient,blogController.addDraft);
+
 router.get('/getdata',verifyClient,blogController.getData);
 router.get('/getblog',verifyClient,blogController.getBlog);
+
+router.get('/getdrafts',verifyClient,blogController.getDrafts);
+router.get('/getdraft',verifyClient,blogController.getDraft);
+
 router.post('/updateblog',verifyClient,blogController.updateblog);
 router.post('/updateviews',verifyClient,blogController.updateviews);
 router.post('/updatelikes',verifyClient,blogController.updatelikes);
+
 router.post('/addcomment',verifyClient,blogController.addComment,mailController.mailer);
 router.post('/addreply',verifyClient,blogController.addReply);
 

@@ -5,6 +5,7 @@ exports.addblog = async (req, res, next) => {
     try {
       const newBlog = await createBlogObj(req);
       const savedBlog = await Blog.create(newBlog);
+      deleteDraft(req);
       return res
         .status(200)
         .send({ message: "Blog added successfully!", blog: savedBlog });
@@ -204,6 +205,17 @@ if (!foundDraft) {
     .status(200)
     .send({ message: "here are the found draft:", foundDraft });
 }
+};
+
+exports.deleteDraft = async (req, res) => {
+  const foundDraft = await Draft.deleteById(req.query.id);
+  // if (!foundDraft) {
+  //   res.status(400).send({ error: "no draft found" });
+  // } else {
+  //   return res
+  //     .status(200)
+  //     .send({ message: "here are the found draft:", foundDraft });
+  // }
 };
 
 const createBlogObj = async (req) => {

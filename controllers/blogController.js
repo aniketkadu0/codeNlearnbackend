@@ -19,7 +19,7 @@ exports.addDraft = async (req, res, next) => {
     const savedDraft = await Draft.create(newDraft);
     return res
       .status(200)
-      .send({ message: "Blog added successfully!", Draft: savedDraft });
+      .send({ message: "Draft added successfully!", Draft: savedDraft });
   } catch (err) {
     return res.status(400).send({ error: "Draft not added", error: err });
   }
@@ -172,7 +172,7 @@ exports.getBlog = async (req, res) => {
 };
 
 exports.getDrafts = async (req, res) => {
-  const getDrafts = await Draft.find({})
+  const allDrafts = await Draft.find({})
   .select({ 
     "_id": 1,
     "thumbnail": 1,
@@ -185,8 +185,8 @@ exports.getDrafts = async (req, res) => {
     "comments" : 1
   });
 
-  if (!getDrafts) {
-    res.status(400).send({ error: "no draft found" });
+  if (!allDrafts) {
+    res.status(400).send({ error: "no drafts found" });
   } else {
     return res
       .status(200)

@@ -208,7 +208,7 @@ if (!foundDraft) {
 };
 
 exports.deleteDraft = async (req, res) => {
-  const foundDraft = await Draft.deleteById(req.query.id);
+  const foundDraft = await Draft.deleteById(req.body._id);
   // if (!foundDraft) {
   //   res.status(400).send({ error: "no draft found" });
   // } else {

@@ -209,13 +209,13 @@ if (!foundDraft) {
 
 exports.deleteDraft = async (req, res) => {
   const foundDraft = await Draft.deleteById(req.body._id);
-  // if (!foundDraft) {
-  //   res.status(400).send({ error: "no draft found" });
-  // } else {
-  //   return res
-  //     .status(200)
-  //     .send({ message: "here are the found draft:", foundDraft });
-  // }
+  if (!foundDraft) {
+    res.status(400).send({ error: "no draft found" });
+  } else {
+    return res
+      .status(200)
+      .send({ message: "here are the found draft:", foundDraft });
+  }
 };
 
 const createBlogObj = async (req) => {

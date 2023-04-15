@@ -5,7 +5,7 @@ exports.addblog = async (req, res, next) => {
     try {
       const newBlog = await createBlogObj(req);
       const savedBlog = await Blog.create(newBlog);
-      deleteDraft(req);
+      this.deleteDraft(req);
       return res
         .status(200)
         .send({ message: "Blog added successfully!", blog: savedBlog });
@@ -208,13 +208,35 @@ if (!foundDraft) {
 };
 
 exports.deleteDraft = async (req, res) => {
-  const foundDraft = await Draft.deleteById(req.body._id);
-  if (!foundDraft) {
-    res.status(400).send({ error: "no draft found" });
-  } else {
+  const foundDraft = await Draft.deleteOne({ _id: req.body._id });
+  // console.log(foundDraft)
+  // if (!foundDraft) {
+  //   res.status(400).send({ error: "no draft found" });
+  // } else {
+  //   return res
+  //     .status(200)
+  //     .send({ message: "here are the found draft:", foundDraft });
+  // }
+};
+
+exports.updateDraft = async (req, res) => {
+  try {
+    const updatedDraft = await Draft.findByIdAndUpdate(
+      req.body._id,
+      { $set: req.body },
+      { new: true }
+  );
+  
+    if (!updatedDraft) {
+      return res.status(400).send({ message: "Could not update draft" });
+    }
     return res
       .status(200)
-      .send({ message: "here are the found draft:", foundDraft });
+      .send({ message: "Draft updated successfully", updatedDraft });
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ error: "An error has occurred, unable to update draft" });
   }
 };
 

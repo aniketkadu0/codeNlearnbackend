@@ -24,6 +24,8 @@ router.get('/getdrafts',verifyClient,blogController.getDrafts);
 router.get('/getdraft',verifyClient,blogController.getDraft);
 
 router.post('/updateblog',verifyClient,blogController.updateblog);
+router.post('/updatedraft',verifyClient,blogController.updateDraft);
+
 router.post('/updateviews',verifyClient,blogController.updateviews);
 router.post('/updatelikes',verifyClient,blogController.updatelikes);
 
